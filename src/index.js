@@ -8,7 +8,8 @@ import schema from './options.json';
 module.exports = () => {};
 
 module.exports.pitch = function loader(request) {
-  const options = loaderUtils.getOptions(this) || {};
+  const options = {...(loaderUtils.getOptions(this) || {})}; 
+ 	options.attrs = {...(options.attrs || {})};
 
   validateOptions(schema, options, {
     name: 'Style Loader',
@@ -31,6 +32,20 @@ module.exports.pitch = function loader(request) {
   if (typeof options.insertInto === 'string') {
     insertInto = `"${options.insertInto}"`;
   }
+  
+  const context = options.context || this.rootContext || (this.options && this.options.context); 
+	const attrs = options.attrs || {};
+	for (let key in attrs) {                                
+		let name = loaderUtils.interpolateName(this, attrs[key], {                
+			context, 
+			content: null,
+			regExp: options.regExp,    
+		});
+		// node_modules/_@ali_vc-xxx-yyy@1.0.0@@ali/vc-xxx-yyy/lib/vu-xxx-yyy-properties/index.less
+		// node_modules/_@ali_vc-xxx-yyy@1.0.1-beta.9@@ali/vc-xxx-yyy/lib/Download/view.less
+		// remove path of node_modules
+		attrs[key] = name.replace(/node_modules\/[\w-_@]+?@\d+\.\d+\.\d+(?:-beta(?:\.\d+)?)?@/, '');
+	}
 
   const hmr = [
     // Hot Module Replacement,
