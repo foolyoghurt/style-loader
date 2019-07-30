@@ -1,13 +1,12 @@
 {
-  "name": "style-loader",
-  "version": "0.23.1",
-  "description": "style loader module for webpack",
+  "name": "style-loader-extra",
+  "version": "1.0.0",
+  "description": "style loader module for webpack, fork from  webpack-contrib/style-loader",
   "license": "MIT",
-  "repository": "webpack-contrib/style-loader",
-  "author": "Tobias Koppers @sokra",
-  "homepage": "https://github.com/webpack-contrib/style-loader",
-  "bugs": "https://github.com/webpack-contrib/style-loader/issues",
-  "main": "dist/index.js",
+  "repository": "foolyoghurt/style-loader",
+  "homepage": "https://github.com/foolyoghurt/style-loader",
+  "bugs": "https://github.com/foolyoghurt/style-loader/issues",
+  "main": "src/index.js",
   "engines": {
     "node": ">= 8.9.0"
   },
